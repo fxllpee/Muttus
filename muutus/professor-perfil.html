@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Professor - Muutus</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/professor-perfil.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo" onclick="window.location.href='index.html'">
+                    <h1>Muutus</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="professores.html" class="nav-link active">Encontrar Professores</a></li>
+                    <li><a href="como-funciona.html" class="nav-link">Como Funciona</a></li>
+                    <li><a href="aluno-dashboard.html" class="nav-link">Área do Aluno</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn-secondary" onclick="logout()">Sair</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Perfil do Professor -->
+    <section class="profile-page">
+        <div class="container">
+            <button class="btn-back" onclick="window.history.back()">← Voltar</button>
+
+            <div class="profile-content" id="profileContent">
+                <!-- Conteúdo será carregado via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Agendamento -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Agendar Aula</h3>
+                <button class="modal-close" onclick="closeBookingModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="bookingForm" onsubmit="submitBooking(event)">
+                    <div class="form-group">
+                        <label for="bookingDate">Data da Aula</label>
+                        <input type="date" id="bookingDate" required class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingTime">Horário</label>
+                        <select id="bookingTime" required class="form-input">
+                            <option value="">Selecione um horário</option>
+                            <option value="08:00">08:00</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingDuration">Duração</label>
+                        <select id="bookingDuration" required class="form-input">
+                            <option value="1">1 hora</option>
+                            <option value="1.5">1h 30min</option>
+                            <option value="2">2 horas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingNotes">Observações (opcional)</label>
+                        <textarea id="bookingNotes" rows="3" class="form-input" placeholder="Descreva seus objetivos ou dúvidas..."></textarea>
+                    </div>
+                    <div class="booking-summary">
+                        <div class="summary-row">
+                            <span>Valor da aula:</span>
+                            <strong id="lessonPrice">R$ 0,00</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Taxa da plataforma (10%):</span>
+                            <strong id="platformFee">R$ 0,00</strong>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <strong id="totalPrice">R$ 0,00</strong>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary btn-full">Confirmar Agendamento</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Muutus</h4>
+                    <p>Transformação pelo conhecimento</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="about.html">Quem Somos</a></li>
+                        <li><a href="como-funciona.html">Como Funciona</a></li>
+                        <li><a href="professores.html">Encontrar Professores</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="termos.html">Termos de Uso</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Muutus. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/professor-perfil.js"></script>
+
+    <script>
+        // Proteger a página
+        window.addEventListener('load', requireAuth);
+    </script>
+</body>
+</html>

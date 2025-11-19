@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Muutus</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1 class="auth-logo" onclick="window.location.href='index.html'">Muutus</h1>
+                <h2>Crie sua conta</h2>
+                <p>Comece sua jornada de aprendizado hoje</p>
+            </div>
+
+            <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="name">Nome completo</label>
+                    <input type="text" id="name" required class="form-input" placeholder="Seu nome">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required class="form-input" placeholder="seu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required class="form-input" placeholder="Mínimo 8 caracteres" minlength="8">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar senha</label>
+                    <input type="password" id="confirmPassword" required class="form-input" placeholder="Digite a senha novamente">
+                </div>
+
+                <div class="form-group">
+                    <label for="userType">Você quer:</label>
+                    <select id="userType" required class="form-input">
+                        <option value="">Selecione uma opção</option>
+                        <option value="student">Aprender (Aluno)</option>
+                        <option value="teacher">Ensinar (Professor)</option>
+                        <option value="both">Ambos</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terms" required>
+                        <span>Concordo com os <a href="termos.html" class="link">Termos de Uso</a> e <a href="privacidade.html" class="link">Política de Privacidade</a></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="age" required>
+                        <span>Confirmo que tenho 18 anos ou mais</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary btn-full btn-large">Criar Conta</button>
+            </form>
+
+            <div class="auth-divider">
+                <span>ou</span>
+            </div>
+
+            <div class="social-login">
+                <button class="btn-social btn-google" onclick="registerWithGoogle()">
+                    <span>🔍</span>
+                    Cadastrar com Google
+                </button>
+                <button class="btn-social btn-facebook" onclick="registerWithFacebook()">
+                    <span>📘</span>
+                    Cadastrar com Facebook
+                </button>
+            </div>
+
+            <div class="auth-footer">
+                <p>Já tem uma conta? <a href="login.html" class="link">Entre aqui</a></p>
+            </div>
+        </div>
+
+        <div class="auth-side">
+            <div class="auth-side-content">
+                <h3>Junte-se à comunidade Muutus</h3>
+                <ul class="benefits-list">
+                    <li>✓ Mais de 1.000 professores especializados</li>
+                    <li>✓ Aprenda no seu ritmo</li>
+                    <li>✓ Certificados verificados</li>
+                    <li>✓ Suporte 24/7</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muutus - Aprenda o que quiser. Ensine o que ama.</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header/Navegação -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>Muutus</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="professores.html">Encontrar Professores</a></li>
+                    <li><a href="como-funciona.html">Como Funciona</a></li>
+                    <li><a href="about.html">Quem Somos</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn-secondary" onclick="window.location.href='login.html'">Entrar</button>
+                    <button class="btn-primary" onclick="window.location.href='cadastro.html'">Cadastrar</button>
+                </div>
+            </nav> 
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">Aprenda o que quiser.<br>Ensine o que ama.</h2>
+                <p class="hero-subtitle">Conecte-se com professores especializados ou compartilhe seu conhecimento com quem deseja aprender.</p>
+                
+                <!-- Barra de Busca -->
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar por aula ou professor (ex: violão, fotografia, marketing digital)">
+                    <button class="btn-search" onclick="searchTeachers()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorias -->
+    <section class="categories">
+        <div class="container">
+            <h3 class="section-title">Explore por Categoria</h3>
+            <div class="category-grid">
+                <div class="category-card" onclick="filterByCategory('arte')">
+                    <div class="category-icon">🎨</div>
+                    <h4>Arte</h4>
+                    <p>Pintura, Desenho, Música</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('tecnologia')">
+                    <div class="category-icon">💻</div>
+                    <h4>Tecnologia</h4>
+                    <p>Programação, Design, TI</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('saude')">
+                    <div class="category-icon">🧘</div>
+                    <h4>Saúde</h4>
+                    <p>Yoga, Nutrição, Fitness</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('ciencias')">
+                    <div class="category-icon">🔬</div>
+                    <h4>Ciências</h4>
+                    <p>Matemática, Física, Química</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('hobbies')">
+                    <div class="category-icon">🎸</div>
+                    <h4>Hobbies</h4>
+                    <p>Fotografia, Culinária, Jardinagem</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('idiomas')">
+                    <div class="category-icon">🌍</div>
+                    <h4>Idiomas</h4>
+                    <p>Inglês, Espanhol, Francês</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professores em Destaque -->
+    <section class="featured-teachers">
+        <div class="container">
+            <h3 class="section-title">Professores em Destaque</h3>
+            <div class="teachers-grid" id="featuredTeachers">
+                <!-- Professores serão carregados via JavaScript -->
+            </div>
+            <div class="text-center">
+                <button class="btn-secondary" onclick="window.location.href='professores.html'">Ver Todos os Professores</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="testimonials">
+        <div class="container">
+            <h3 class="section-title">O que dizem sobre nós</h3>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Aprendi violão com um professor incrível! A plataforma é muito fácil de usar e o sistema de pagamento é super seguro."</p>
+                    <div class="testimonial-author">
+                        <strong>Maria Silva</strong>
+                        <span>Aluna</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Como professor, consegui alcançar muito mais alunos. O Muutus mudou minha forma de ensinar!"</p>
+                    <div class="testimonial-author">
+                        <strong>João Santos</strong>
+                        <span>Professor de Fotografia</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Plataforma confiável e professores qualificados. Já fiz várias aulas e todas foram excelentes!"</p>
+                    <div class="testimonial-author">
+                        <strong>Ana Costa</strong>
+                        <span>Aluna</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h3>Pronto para começar sua jornada?</h3>
+                <p>Cadastre-se gratuitamente e comece a aprender ou ensinar hoje mesmo.</p>
+                <button class="btn-primary btn-large" onclick="window.location.href='cadastro.html'">Comece Agora</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Muutus</h4>
+                    <p>Transformação pelo conhecimento</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="about.html">Quem Somos</a></li>
+                        <li><a href="como-funciona.html">Como Funciona</a></li>
+                        <li><a href="professores.html">Encontrar Professores</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="termos.html">Termos de Uso</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Muutus. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

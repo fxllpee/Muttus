@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Funciona - Muutus</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <!-- Header/Navegação -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>Muutus</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="professores.html">Encontrar Professores</a></li>
+                    <li><a href="como-funciona.html" class="active">Como Funciona</a></li>
+                    <li><a href="about.html">Quem Somos</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn-secondary" onclick="window.location.href='login.html'">Entrar</button>
+                    <button class="btn-primary" onclick="window.location.href='cadastro.html'">Cadastrar</button>
+                </div>
+            </nav> 
+        </div>
+    </header>
+   <style>
+        .how-it- works {
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1D3557 0%, #BFD6E5 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .step-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .comparison-section {
+            background: var(--bg-light);
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 3rem;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .comparison-column h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .comparison-list li:last-child {
+            border-bottom: none;
+        }
+
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: background-color 0.3s;
+        }
+
+        .faq-question:hover {
+            background-color: var(--bg-light);
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+            background-color: var(--bg-light);
+        }
+
+        .faq-answer.open {
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            padding: 1.5rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .benefits-section {
+            background: linear-gradient(135deg,#1D3557 0%, #BFD6E5 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 3rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-item p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+
+    <!-- Conteúdo Principal -->
+    <main class="how-it-works">
+        <div class="container">
+            <!-- Hero -->
+            <h1 class="section-title">Como Funciona o Muutus</h1>
+            <p class="section-subtitle">Descubra como nossa plataforma conecta alunos e professores para criar oportunidades de aprendizado</p>
+
+            <!-- Para Alunos -->
+            <section>
+                <h2 class="section-title" style="font-size: 2rem; margin-top: 3rem;">Para Alunos</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Crie sua Conta</h3>
+                        <p>Cadastre-se gratuitamente em poucos minutos. Basta informar seu e-mail e criar uma senha.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Explore Professores</h3>
+                        <p>Navegue por nossa comunidade de professores especializados. Use filtros para encontrar exatamente o que procura.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Agende uma Aula</h3>
+                        <p>Escolha a data, hora e duração. Confirme o agendamento e receba a confirmação do professor.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>Aprenda</h3>
+                        <p>Participe da aula no horário agendado. Faça perguntas e aprenda no seu ritmo.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h3>Avalie</h3>
+                        <p>Após a aula, deixe uma avaliação e comentário sobre sua experiência com o professor.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">6</div>
+                        <h3>Aproveite</h3>
+                        <p>Agende mais aulas, explore novos professores e continue sua jornada de aprendizado.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Para Professores -->
+            <section>
+                <h2 class="section-title" style="font-size: 2rem; margin-top: 3rem;">Para Professores</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Cadastro Verificado</h3>
+                        <p>Crie sua conta como professor. Envie seus documentos para verificação de qualificações.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Configure seu Perfil</h3>
+                        <p>Adicione sua foto, biografia, especialidades e defina seu preço por hora.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Configure Disponibilidade</h3>
+                        <p>Defina seus horários disponíveis e dias de trabalho. Você controla sua agenda.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>Receba Solicitações</h3>
+                        <p>Alunos começarão a solicitar aulas. Você pode aceitar ou recusar conforme sua disponibilidade.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h3>Ensine</h3>
+                        <p>Realize as aulas conforme agendado. Use nossa plataforma para se comunicar com alunos.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">6</div>
+                        <h3>Ganhe</h3>
+                        <p>Receba pagamentos seguros. Quanto mais aulas, mais você ganha. Sem limites!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparação -->
+            <section class="comparison-section">
+                <h2 class="section-title" style="font-size: 2rem; color: var(--text-dark);">O que você Ganha</h2>
+                <div class="comparison-grid">
+                    <div>
+                        <h3>👨‍🎓 Como Aluno</h3>
+                        <ul class="comparison-list">
+                            <li><span>✓</span> Acesso a professores verificados</li>
+                            <li><span>✓</span> Aulas personalizadas</li>
+                            <li><span>✓</span> Flexibilidade de horários</li>
+                            <li><span>✓</span> Preços competitivos</li>
+                            <li><span>✓</span> Avaliações verificadas</li>
+                            <li><span>✓</span> Suporte 24/7</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>👨‍🏫 Como Professor</h3>
+                        <ul class="comparison-list">
+                            <li><span>✓</span> Alcance milhares de alunos</li>
+                            <li><span>✓</span> Controle total da agenda</li>
+                            <li><span>✓</span> Defina seus próprios preços</li>
+                            <li><span>✓</span> Pagamentos seguros</li>
+                            <li><span>✓</span> Ferramentas de comunicação</li>
+                            <li><span>✓</span> Crescimento profissional</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Benefícios -->
+            <section class="benefits-section">
+                <h2 class="section-title" style="color: white;">Por Que Escolher Muutus</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🔒</div>
+                        <div>
+                            <h4>Segurança Garantida</h4>
+                            <p>Seus dados são protegidos com criptografia de ponta. Pagamentos seguros e verificados.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⭐</div>
+                        <div>
+                            <h4>Qualidade Verificada</h4>
+                            <p>Todos os professores são verificados. Avaliações reais de alunos reais.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💬</div>
+                        <div>
+                            <h4>Suporte Dedicado</h4>
+                            <p>Nossa equipe está sempre pronta para ajudar. Suporte em português 24/7.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🌍</div>
+                        <div>
+                            <h4>Comunidade Global</h4>
+                            <p>Conecte-se com pessoas de todo o mundo. Aprenda e ensine sem fronteiras.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">📱</div>
+                        <div>
+                            <h4>Acesso em Qualquer Lugar</h4>
+                            <p>Use no computador, tablet ou smartphone. Sua educação vai com você.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💰</div>
+                        <div>
+                            <h4>Preços Justos</h4>
+                            <p>Sem taxas ocultas. Você sabe exatamente quanto vai pagar ou ganhar.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="faq-section">
+                <h2 class="section-title" style="font-size: 2rem; margin-bottom: 2rem;">Perguntas Frequentes</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Como funciona o pagamento?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Os pagamentos são processados de forma segura através de nossa plataforma. Os alunos pagam antes da aula, e os professores recebem em sua conta bancária em até 2 dias úteis. Oferecemos várias formas de pagamento para sua conveniência.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Qual é a taxa da plataforma?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para alunos, não há taxa adicional além do preço da aula. Para professores, cobramos uma taxa de 10% sobre cada aula realizada. Isso nos permite manter a plataforma segura e oferecer suporte de qualidade.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Posso cancelar uma aula?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! Você pode cancelar uma aula até 24 horas antes do horário agendado e receber um reembolso completo. Cancelamentos com menos de 24 horas podem estar sujeitos a uma taxa.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Como me torno um professor verificado?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para se tornar um professor verificado, você precisa enviar seus documentos de qualificação (diplomas, certificados, etc.). Nossa equipe revisará seus documentos em até 3 dias úteis. Uma vez aprovado, você receberá um selo de verificação em seu perfil.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Qual é a idade mínima para usar a plataforma?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Você deve ter pelo menos 18 anos para usar o Muutus. Se você é menor de idade, um responsável pode criar uma conta em seu nome e gerenciar as aulas.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Posso ensinar vários assuntos?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! Você pode adicionar múltiplas especialidades ao seu perfil. Basta listar todas as áreas em que você é qualificado para ensinar. Você pode até definir preços diferentes para cada especialidade.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Sobre Muutus</h4>
+                    <p>Conectando professores e alunos para criar oportunidades de aprendizado.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="como-funciona.html">Como Funciona</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="mailto:contato@muutus.com">contato@muutus.com</a></li>
+                        <li><a href="tel:+5511999999999">(11) 99999-9999</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Muutus. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
+            
+            answer.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

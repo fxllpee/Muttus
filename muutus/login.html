@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - Muutus</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1 class="auth-logo" onclick="window.location.href='index.html'">Muutus</h1>
+                <h2>Bem-vindo de volta!</h2>
+                <p>Entre para continuar sua jornada de aprendizado</p>
+            </div>
+
+            <form id="loginForm" class="auth-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required class="form-input" placeholder="seu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required class="form-input" placeholder="••••••••">
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember">
+                        <span>Lembrar de mim</span>
+                    </label>
+                    <a href="recuperar-senha.html" class="link">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" class="btn-primary btn-full btn-large">Entrar</button>
+            </form>
+
+            <div class="auth-divider">
+                <span>ou</span>
+            </div>
+
+            <div class="social-login">
+                <button class="btn-social btn-google" onclick="loginWithGoogle()">
+                    <span>🔍</span>
+                    Continuar com Google
+                </button>
+                <button class="btn-social btn-facebook" onclick="loginWithFacebook()">
+                    <span>📘</span>
+                    Continuar com Facebook
+                </button>
+            </div>
+
+            <div class="auth-footer">
+                <p>Não tem uma conta? <a href="cadastro.html" class="link">Cadastre-se</a></p>
+            </div>
+        </div>
+
+        <div class="auth-side">
+            <div class="auth-side-content">
+                <h3>Transforme seu conhecimento em oportunidades</h3>
+                <ul class="benefits-list">
+                    <li>✓ Acesso a professores especializados</li>
+                    <li>✓ Aulas personalizadas para você</li>
+                    <li>✓ Pagamento seguro e protegido</li>
+                    <li>✓ Avaliações verificadas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Professor - Muutus</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 2rem 0;
+            position: sticky;
+            top: 80px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding-left: 2rem;
+        }
+
+        .dashboard-content {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-header p {
+            color: var(--text-light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-change {
+            font-size: 0.875rem;
+            color: #10b981;
+            margin-top: 0.5rem;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-save {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-save:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .lessons-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .lessons-table th {
+            background-color: var(--bg-light);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .lessons-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .lessons-table tr:hover {
+            background-color: var(--bg-light);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.375rem 0.875rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-confirmed {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-pending {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-completed {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .profile-section {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar-upload {
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: var(--radius-lg);
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .btn-upload {
+            background-color: var(--bg-light);
+            border: 2px dashed var(--border-color);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-upload:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .availability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .day-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .day-checkbox input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+                display: flex;
+                overflow-x: auto;
+                padding: 1rem 0;
+            }
+
+            .sidebar-menu {
+                display: flex;
+                gap: 0;
+            }
+
+            .sidebar-menu li {
+                border-bottom: none;
+                border-right: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-section {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-avatar {
+                width: 100%;
+                max-width: 200px;
+                margin: 0 auto 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <h1 class="logo" onclick="window.location.href='index.html'">Muutus</h1>
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="professores.html">Encontrar Professores</a></li>
+                    <li><a href="como-funciona.html">Como Funciona</a></li>
+                    <li><a href="professor-dashboard.html" class="active">Área do Professor</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn-secondary" onclick="logout()">Sair</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" onclick="showSection('dashboard', event)" class="active">📊 Dashboard</a></li>
+                <li><a href="#" onclick="showSection('profile', event)">👤 Meu Perfil</a></li>
+                <li><a href="#" onclick="showSection('lessons', event)">📅 Minhas Aulas</a></li>
+                <li><a href="#" onclick="showSection('availability', event)">⏰ Disponibilidade</a></li>
+                <li><a href="#" onclick="showSection('earnings', event)">💰 Ganhos</a></li>
+                <li><a href="#" onclick="showSection('reviews', event)">⭐ Avaliações</a></li>
+                <li><a href="#" onclick="logout()">🚪 Sair</a></li>
+            </ul>
+        </aside>
+
+        <!-- Conteúdo -->
+        <main class="dashboard-content">
+            <!-- Dashboard -->
+            <section id="dashboard" class="content-section active">
+                <div class="dashboard-header">
+                    <h1>Bem-vindo, Professor!</h1>
+                    <p>Aqui você pode gerenciar suas aulas, perfil e ganhos</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Aulas Este Mês</div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-change">↑ 3 em relação ao mês anterior</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Ganhos Este Mês</div>
+                        <div class="stat-value">R$ 1.440</div>
+                        <div class="stat-change">↑ 25% em relação ao mês anterior</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Avaliação Média</div>
+                        <div class="stat-value">4.9</div>
+                        <div class="stat-change">⭐ Excelente desempenho</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Alunos Ativos</div>
+                        <div class="stat-value">8</div>
+                        <div class="stat-change">Alunos regulares</div>
+                    </div>
+                </div>
+
+                <div style="background: white; border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
+                    <h3 class="section-title">Próximas Aulas</h3>
+                    <table class="lessons-table">
+                        <thead>
+                            <tr>
+                                <th>Aluno</th>
+                                <th>Data</th>
+                                <th>Hora</th>
+                                <th>Duração</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Maria Silva</td>
+                                <td>20/11/2025</td>
+                                <td>14:00</td>
+                                <td>1 hora</td>
+                                <td><span class="status-badge status-confirmed">Confirmada</span></td>
+                            </tr>
+                            <tr>
+                                <td>João Santos</td>
+                                <td>21/11/2025</td>
+                                <td>10:00</td>
+                                <td>1.5 horas</td>
+                                <td><span class="status-badge status-confirmed">Confirmada</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ana Costa</td>
+                                <td>22/11/2025</td>
+                                <td>16:00</td>
+                                <td>1 hora</td>
+                                <td><span class="status-badge status-pending">Pendente</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Meu Perfil -->
+            <section id="profile" class="content-section">
+                <h2 class="section-title">Editar Meu Perfil</h2>
+
+                <div class="profile-section">
+                    <div class="profile-avatar-upload">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" alt="Foto do Professor" class="profile-avatar">
+                        <label class="btn-upload">
+                            📷 Alterar Foto
+                            <input type="file" accept="image/*" style="display: none;">
+                        </label>
+                    </div>
+
+                    <form onsubmit="saveProfile(event)">
+                        <div class="form-group">
+                            <label>Nome Completo</label>
+                            <input type="text" class="form-input" value="Ana Paula Silva" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="email" class="form-input" value="ana@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Especialidade Principal</label>
+                            <input type="text" class="form-input" value="Fotografia Digital" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Preço por Hora (R$)</label>
+                            <input type="number" class="form-input" value="120" min="10" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Biografia</label>
+                            <textarea class="form-textarea" required>Fotógrafa profissional especializada em retratos e fotografia comercial. Com mais de 10 anos de experiência, ajudo meus alunos a dominar técnicas profissionais de fotografia.</textarea>
+                        </div>
+
+                        <button type="submit" class="btn-save">💾 Salvar Alterações</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Minhas Aulas -->
+            <section id="lessons" class="content-section">
+                <h2 class="section-title">Minhas Aulas</h2>
+
+                <table class="lessons-table">
+                    <thead>
+                        <tr>
+                            <th>Aluno</th>
+                            <th>Data</th>
+                            <th>Hora</th>
+                            <th>Duração</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Maria Silva</td>
+                            <td>18/11/2025</td>
+                            <td>14:00</td>
+                            <td>1 hora</td>
+                            <td>R$ 120</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>João Santos</td>
+                            <td>17/11/2025</td>
+                            <td>10:00</td>
+                            <td>1.5 horas</td>
+                            <td>R$ 180</td>
+                            <td><span class="status-badge status-completed">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ana Costa</td>
+                            <td>20/11/2025</td>
+                            <td>16:00</td>
+                            <td>1 hora</td>
+                            <td>R$ 120</td>
+                            <td><span class="status-badge status-confirmed">Confirmada</span></td>
+                        </tr>
+                        <tr>
+                            <td>Pedro Oliveira</td>
+                            <td>21/11/2025</td>
+                            <td>15:00</td>
+                            <td>2 horas</td>
+                            <td>R$ 240</td>
+                            <td><span class="status-badge status-pending">Pendente</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Disponibilidade -->
+            <section id="availability" class="content-section">
+                <h2 class="section-title">Configure Sua Disponibilidade</h2>
+
+                <form onsubmit="saveAvailability(event)">
+                    <div class="form-group">
+                        <label>Dias da Semana</label>
+                        <div class="availability-grid">
+                            <div class="day-checkbox">
+                                <input type="checkbox" id="mon" checked>
+                                <label for="mon">Segunda</label>
+                            </div>
+                            <div class="day-checkbox">
+                                <input type="checkbox" id="tue" checked>
+                                <label for="tue">Terça</label>
+                            </div>
+                            <div class="day-checkbox">
+                                <input type="checkbox" id="wed" checked>
+                                <label for="wed">Quarta</label>
+                            </div>
+                            <div class="day-checkbox">
+                                <input type="checkbox" id="thu" checked>
+                                <label for="thu">Quinta</label>
+                            </div>
+                            <div class="day-checkbox">
+                                <input type="checkbox" id="fri" checked>
+                                <label for="fri">Sexta</label>
+                            </div>
+                            <div class="day-checkbox">
+                                <input type="checkbox" id="sat">
+                                <label for="sat">Sábado</label>
+                            </div>
+                            <div class="day-checkbox">
+                                <input type="checkbox" id="sun">
+                                <label for="sun">Domingo</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Horário de Início</label>
+                            <input type="time" class="form-input" value="08:00">
+                        </div>
+                        <div class="form-group">
+                            <label>Horário de Término</label>
+                            <input type="time" class="form-input" value="20:00">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-save">💾 Salvar Disponibilidade</button>
+                </form>
+            </section>
+
+            <!-- Ganhos -->
+            <section id="earnings" class="content-section">
+                <h2 class="section-title">Meus Ganhos</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Ganhos Este Mês</div>
+                        <div class="stat-value">R$ 1.440</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Ganhos Total</div>
+                        <div class="stat-value">R$ 8.640</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Aulas Realizadas</div>
+                        <div class="stat-value">72</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Média por Aula</div>
+                        <div class="stat-value">R$ 120</div>
+                    </div>
+                </div>
+
+                <div style="background: white; border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
+                    <h3 class="section-title">Histórico de Ganhos</h3>
+                    <table class="lessons-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Aluno</th>
+                                <th>Duração</th>
+                                <th>Valor Bruto</th>
+                                <th>Taxa (10%)</th>
+                                <th>Valor Líquido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>18/11/2024</td>
+                                <td>Maria Silva</td>
+                                <td>1 hora</td>
+                                <td>R$ 120</td>
+                                <td>R$ 12</td>
+                                <td>R$ 108</td>
+                            </tr>
+                            <tr>
+                                <td>17/11/2024</td>
+                                <td>João Santos</td>
+                                <td>1.5 horas</td>
+                                <td>R$ 180</td>
+                                <td>R$ 18</td>
+                                <td>R$ 162</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Avaliações -->
+            <section id="reviews" class="content-section">
+                <h2 class="section-title">Minhas Avaliações</h2>
+
+                <div style="background: white; border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
+                    <div style="margin-bottom: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <div style="font-size: 0.875rem; color: var(--text-light);">Maria Silva</div>
+                                <div style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.5rem;">18/11/2024</div>
+                                <div style="color: #fbbf24; margin-bottom: 0.5rem;">★★★★★</div>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-dark); line-height: 1.6;">Excelente aula! Aprendi muito sobre composição e iluminação. A professora é muito paciente e didática.</p>
+                    </div>
+
+                    <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+
+                    <div style="margin-bottom: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <div style="font-size: 0.875rem; color: var(--text-light);">João Santos</div>
+                                <div style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.5rem;">17/11/2024</div>
+                                <div style="color: #fbbf24; margin-bottom: 0.5rem;">★★★★★</div>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-dark); line-height: 1.6;">Aula prática e objetiva. Recomendo muito! Já agendei mais aulas.</p>
+                    </div>
+
+                    <hr style="border: none; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <div style="font-size: 0.875rem; color: var(--text-light);">Ana Costa</div>
+                                <div style="font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.5rem;">15/11/2024</div>
+                                <div style="color: #fbbf24; margin-bottom: 0.5rem;">★★★★☆</div>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-dark); line-height: 1.6;">Muito bom! Só achei que poderia ter mais exemplos práticos.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Sobre Muutus</h4>
+                    <p>Conectando professores e alunos para criar oportunidades de aprendizado.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="como-funciona.html">Como Funciona</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="mailto:contato@muutus.com">contato@muutus.com</a></li>
+                        <li><a href="tel:+5511999999999">(11) 99999-9999</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Muutus. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId, event) {
+            event.preventDefault();
+            
+            // Esconder todas as seções
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Mostrar seção selecionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Atualizar menu ativo
+            const links = document.querySelectorAll('.sidebar-menu a');
+            links.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function saveProfile(event) {
+            event.preventDefault();
+            alert('Perfil salvo com sucesso!');
+        }
+
+        function saveAvailability(event) {
+            event.preventDefault();
+            alert('Disponibilidade salva com sucesso!');
+        }
+
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                localStorage.removeItem('session');
+                sessionStorage.removeItem('session');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Verificar autenticação
+        window.addEventListener('load', function() {
+            if (!isLoggedIn()) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

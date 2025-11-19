@@ -1,0 +1,336 @@
+/* Página de Professores */
+.teachers-page {
+    padding: 3rem 0;
+    min-height: calc(100vh - 400px);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    font-size: 1.125rem;
+    color: var(--text-light);
+}
+
+.teachers-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+}
+
+/* Sidebar de Filtros */
+.filters-sidebar {
+    background-color: var(--bg-white);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.filters-sidebar h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    font-size: 0.9375rem;
+}
+
+.filter-input,
+.filter-select {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+    transition: border-color 0.3s;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.price-range {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-input-small {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+}
+
+.price-range span {
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+.btn-full {
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+/* Lista de Professores */
+.teachers-content {
+    flex: 1;
+}
+
+.results-header {
+    margin-bottom: 1.5rem;
+}
+
+.results-header p {
+    color: var(--text-light);
+    font-size: 0.9375rem;
+}
+
+.teachers-list {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.teacher-item {
+    background-color: var(--bg-white);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.teacher-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.teacher-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.teacher-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.teacher-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 0.75rem;
+}
+
+.teacher-title h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.teacher-title p {
+    color: var(--text-light);
+    font-size: 0.9375rem;
+}
+
+.teacher-price-tag {
+    text-align: right;
+}
+
+.teacher-price-tag .price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.teacher-price-tag .period {
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+.teacher-bio {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.teacher-meta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+}
+
+.meta-item .stars {
+    color: #fbbf24;
+}
+
+.teacher-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.btn-view {
+    flex: 1;
+    padding: 0.625rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-view:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-favorite {
+    padding: 0.625rem 1rem;
+    background-color: transparent;
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-favorite:hover {
+    background-color: var(--bg-light);
+}
+
+.btn-favorite.active {
+    background-color: #fef2f2;
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+/* Paginação */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.page-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.page-btn:hover {
+    background-color: var(--bg-light);
+}
+
+.page-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Estado vazio */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+/* Responsividade */
+@media (max-width: 968px) {
+    .teachers-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+    .teacher-item {
+        flex-direction: column;
+    }
+
+    .teacher-avatar {
+        width: 100%;
+        height: 200px;
+    }
+
+    .teacher-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .teacher-price-tag {
+        text-align: left;
+    }
+
+    .teacher-meta {
+        flex-direction: column;
+        align-items: start;
+        gap: 0.5rem;
+    }
+}
